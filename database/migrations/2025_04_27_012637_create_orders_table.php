@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->dateTime('order_date');
+            $table->decimal('total')->default(0);
+            $table->string('order_status')->default('Default');
+            $table->string('payment_status')->default('Default');
+            $table->string('shipping_status')->default('Default');
+            $table->string('tracking_number')->default('0');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
