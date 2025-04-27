@@ -77,7 +77,7 @@
                             </svg>
                             <span
                                 class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                                {{ Auth::check() ? Auth::user()->cart->details->count() : 0 }}
+                                {{ Auth::check() && Auth::user()->cart ? Auth::user()->cart->details->count() : 0 }}
                             </span>
                         </a>
                     </div>

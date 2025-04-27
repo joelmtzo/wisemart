@@ -20,7 +20,7 @@
                         class="block w-full py-2 px-4 rounded bg-blue-600 text-white hover:bg-blue-700">
                         Mis Pedidos
                     </a>
-                    <a href="{{ route('user.orders') }}" 
+                    <a href="{{ route('user.info') }}" 
                         class="block w-full py-2 px-4 rounded text-gray-700 hover:bg-gray-100">
                         Mi información
                     </a>
@@ -80,7 +80,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                {{ $order->status }}
+                                                {{ $order->order_status }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 Route::middleware('auth')->group(function() {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.index');
-    Route::get('/profile/orders', [UserController::class, 'orderHistory'])->name('user.orders');
+    Route::get('/profile/info', [UserController::class, 'showUserInfo'])->name('user.info');
     Route::put('/profile', [UserController::class, 'updateProfile'])->name('user.update');
+});
+
+Route::middleware('auth')->group(function() {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout/shipping', [CheckoutController::class, 'saveShipping'])->name('checkout.saveShipping');
+    Route::get('/checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 });

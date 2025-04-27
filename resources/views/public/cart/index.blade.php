@@ -92,9 +92,9 @@
                         <span class="font-semibold">Total:</span>
                         <span class="font-semibold">${{ number_format($cart->total, 2) }}</span>
                     </div>
-                    <button class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                    <a href="{{ route('checkout.index') }}" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 inline-block text-center">
                         Proceder al Pago
-                    </button>
+                    </a>
                     <a href="{{ route('home') }}" class="mt-4 inline-block w-full bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 text-center">
                         Continuar Comprando
                     </a>
