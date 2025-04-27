@@ -3,14 +3,16 @@
 @section('content')
     <div class="container mx-auto px-4 py-8">
         <div class="bg-white p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            
+            <div class="grid grid-cols-5 gap-8">
                 <!-- Imagen del producto -->
-                <div class="flex items-center justify-center">
+                <div class="col-span-3 flex items-center justify-center">
                     <div class="w-full h-96 bg-gray-200 rounded-lg"></div>
                 </div>
 
                 <!-- Detalles del producto -->
-                <div class="border border-gray-200 rounded-lg p-6">
+                <div class="col-span-2 border border-gray-200 rounded-lg p-6">
                     <p class="text-sm text-gray-600">
                         <a href="#" class="hover:text-blue-600">{{ $product->brand }}</a>
                     </p>
@@ -30,9 +32,14 @@
                     </div>
 
                     <div class="mt-8">
-                        <a href="#" class="inline-block bg-blue-600 text-white px-8 py-3 rounded hover:bg-blue-700 transition">
-                            Agregar al carrito
-                        </a>
+                        <form action="{{ route('cart.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="inline-block bg-blue-600 text-white px-8 py-3 rounded hover:bg-blue-700 transition">
+                                Agregar al carrito
+                            </button>
+                        </form>
 
                         <hr class="my-4 border-gray-200">
 
