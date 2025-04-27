@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        $user = \App\Models\User::where('email', 'admin@example.com')->first();
-        auth()->login($user);
-    }
+    // public function __construct()
+    // {
+    //     $user = \App\Models\User::where('email', 'admin@example.com')->first();
+    //     auth()->login($user);
+    // }
     
     public function index()
     {

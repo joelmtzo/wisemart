@@ -14,7 +14,8 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <h1 class="text-2xl font-bold">
-                        <a href="/" class="hover:text-blue-200">Wisemart <span class="text-yellow-500 text-2xl font-bold">*</span></a>
+                        <a href="/" class="hover:text-blue-200">Wisemart <span
+                                class="text-yellow-500 text-2xl font-bold">*</span></a>
                     </h1>
                 </div>
                 <div class="relative">
@@ -64,9 +65,11 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Login</button>
+                    <a href="{{ route('login') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Mi
+                        Cuenta</a>
                     <div class="relative">
-                        <a href="{{ route('cart.index') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 inline-block">
+                        <a href="{{ route('cart.index') }}"
+                            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -96,7 +99,7 @@
             margin-top: auto;
         }
     </style>
-    
+
     <footer class="bg-gray-100 py-4 mt-8">
         <div class="container mx-auto px-4">
             <div class="text-center text-gray-600 text-sm">

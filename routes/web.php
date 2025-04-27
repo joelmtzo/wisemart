@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class,"index"])->name("home");
@@ -13,4 +15,16 @@ Route::middleware('auth')->group(function() {
     Route::put('/cart/{detail}', [CartController::class, 'updateItem'])->name('cart.update');
     Route::delete('/cart/{detail}', [CartController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+});
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.index');
+    Route::get('/profile/orders', [UserController::class, 'orderHistory'])->name('user.orders');
+    Route::put('/profile', [UserController::class, 'updateProfile'])->name('user.update');
 });

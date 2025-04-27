@@ -72,9 +72,15 @@
                 <div class="grid grid-cols-4 mt-6">
                     @foreach ($products as $product)
                         <div class="bg-white p-4 rounded-lg">
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded w-full mb-2 hover:bg-blue-600">
-                                + Agregar
-                            </button>
+                            <a href="{{ route('product.show', $product->id) }}" class="block w-full h-48 bg-gray-200 rounded mb-4"></a>
+                            <form action="{{ route('cart.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full mb-2 hover:bg-blue-600">
+                                    + Agregar
+                                </button>
+                            </form>
                             <p class="text-green-600 font-bold text-xl">$ {{ $product->price }}</p>
                             <p class="text-gray-600 text-sm">{{ $product->brand }}</p>
                             <h3 class="text-gray-800 font-medium">
