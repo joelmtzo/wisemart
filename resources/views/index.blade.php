@@ -51,6 +51,50 @@
                     </div>
                 </div>
 
+                <div class="mt-6">
+                    <a id="applyFiltersButton" href="#" class="bg-blue-500 text-white px-4 py-2 rounded w-full hover:bg-blue-600 text-center block">
+                        Aplicar Filtros
+                    </a>
+                    @if(request()->has('category') || request()->has('brand'))
+                        <a id="resetFiltersButton" href="{{ url()->current() }}" class="bg-gray-500 text-white px-4 py-2 rounded w-full hover:bg-gray-600 text-center block mt-2">
+                            Resetear Filtros
+                        </a>
+                    @endif
+                </div>
+
+                <script>
+                    function updateFilterLink() {
+                        const selectedCategories = [];
+                        const selectedBrands = [];
+
+                        document.querySelectorAll('#categoryFilter input[type="checkbox"]:checked').forEach(checkbox => {
+                            selectedCategories.push(checkbox.id.replace('cat', ''));
+                        });
+
+                        document.querySelectorAll('#brandFilter input[type="checkbox"]:checked').forEach(checkbox => {
+                            selectedBrands.push(checkbox.id.replace('brand', ''));
+                        });
+
+                        const queryParams = new URLSearchParams();
+                        if (selectedCategories.length) {
+                            queryParams.append('category', selectedCategories.join(','));
+                        }
+                        if (selectedBrands.length) {
+                            queryParams.append('brand', selectedBrands.join(','));
+                        }
+
+                        const applyFiltersButton = document.getElementById('applyFiltersButton');
+                        applyFiltersButton.href = `{{ url()->current() }}?${queryParams.toString()}`;
+                    }
+
+                    document.querySelectorAll('#categoryFilter input[type="checkbox"], #brandFilter input[type="checkbox"]').forEach(checkbox => {
+                        checkbox.addEventListener('change', updateFilterLink);
+                    });
+
+                    // Initialize the link on page load
+                    updateFilterLink();
+                </script>
+
                 <script>
                     function toggleCollapse(id) {
                         const element = document.getElementById(id);

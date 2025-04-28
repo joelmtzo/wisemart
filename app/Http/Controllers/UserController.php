@@ -19,6 +19,14 @@ class UserController extends Controller
         return view('public.user.profile', compact('user'));
     }
 
+    public function orderDetail($orderId)
+    {
+        $user = auth()->user();
+        $order = $user->orders()->where('id', $orderId)->firstOrFail();
+
+        return view('public.user.order-detail', compact('order'));
+    }
+
     public function updateProfile(Request $request)
     {
         $validated = $request->validate([

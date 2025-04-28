@@ -7,7 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get("/", [HomeController::class,"index"])->name("home");
+Route::get("/", [HomeController::class, "index"])->name("home");
 Route::get('/product/{id}', [HomeController::class, 'show'])->name('product.show');
 
 Route::middleware('auth')->group(function() {
@@ -27,6 +27,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::middleware('auth')->group(function() {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.index');
     Route::get('/profile/info', [UserController::class, 'showUserInfo'])->name('user.info');
+    Route::get('/profile/orders/{order}', [UserController::class, 'orderDetail'])->name('user.orderDetail');
     Route::put('/profile', [UserController::class, 'updateProfile'])->name('user.update');
 });
 

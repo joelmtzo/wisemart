@@ -14,12 +14,22 @@ class HomeController extends Controller
     //     auth()->login($user);
     // }
     
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate();
+        $query = Product::query();
+        
+        if ($request->has('brand')) {
+            $query->where('brand', $request->input('brand'));
+        }
+
+        if ($request->has('category')) {
+            $query->where('category_id', $request->input('category'));
+        }
+
+        $products = $query->paginate();
         $categories = Category::all();
         
-        return view('index', ['products' => $products, 'categories'=> $categories]);
+        return view('index', ['products' => $products, 'categories' => $categories]);
     }
 
     public function show($id)
@@ -27,7 +37,7 @@ class HomeController extends Controller
         $product = Product::findOrFail($id);
         $relatedProducts = Product::where('category_id', $product->category_id)
                                  ->where('id', '!=', $id)
-                                 ->limit(4)
+                                 ->limit(5)
                                  ->get();
 
         return view('public.product-detail', [

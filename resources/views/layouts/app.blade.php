@@ -25,12 +25,16 @@
                         <span class="ml-2">▼</span>
                     </button>
                     <div id="categoryDropdown" class="hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-lg">
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Electrónicos</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Hogar y Jardín</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Ropa y Accesorios</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Deportes</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Libros</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Juguetes</a>
+                        @php
+                            use App\Models\Category;
+                            $categories = Category::all();
+                        @endphp
+                        @foreach ($categories as $category)
+                            <a href="{{ route('home', ['category' => $category->id]) }}" 
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                {{ $category->name }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
 
