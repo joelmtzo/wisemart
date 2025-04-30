@@ -35,8 +35,13 @@ class HomeController extends Controller
 
         $products = $query->paginate();
         $categories = Category::all();
+        $brands = Product::select('brand')->distinct()->pluck('brand');
         
-        return view('index', ['products' => $products, 'categories' => $categories]);
+        return view('index', [
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands
+        ]);
     }
 
     public function show($id)

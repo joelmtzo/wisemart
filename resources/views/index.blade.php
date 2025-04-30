@@ -34,18 +34,12 @@
                         </button>
                         <div id="brandFilter" class="hidden p-4">
                             <div class="space-y-2">
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="brand1" class="mr-2">
-                                    <label for="brand1">Samsung</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="brand2" class="mr-2">
-                                    <label for="brand2">Apple</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="brand3" class="mr-2">
-                                    <label for="brand3">LG</label>
-                                </div>
+                                @foreach($brands as $brand)
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="brand{{$brand}}" class="mr-2">
+                                        <label for="brand{{$brand}}">{{$brand}}</label>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
