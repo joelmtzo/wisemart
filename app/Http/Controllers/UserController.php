@@ -9,7 +9,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = auth()->user();
-        $orders = $user->orders()->orderBy('created_at', 'desc')->paginate(10);
+        $orders = $user->orders()->orderBy('id', 'desc')->paginate(10);
         return view('public.user.index', compact('user', 'orders'));
     }
 

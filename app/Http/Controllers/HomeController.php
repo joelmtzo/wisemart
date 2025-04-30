@@ -26,6 +26,13 @@ class HomeController extends Controller
             $query->where('category_id', $request->input('category'));
         }
 
+        if ($request->has('query')) {
+            $query->where(function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->input('query') . '%')
+              ->orWhere('brand', 'like', '%' . $request->input('query') . '%');
+            });
+        }
+
         $products = $query->paginate();
         $categories = Category::all();
         

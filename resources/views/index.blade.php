@@ -112,28 +112,37 @@
                 </script>
             </div>
             <div class="w-3/4">
-                <h1 class="text-2xl font-bold">Productos</h1>
-                <div class="grid grid-cols-4 mt-6">
-                    @foreach ($products as $product)
-                        <div class="bg-white p-4 rounded-lg">
-                            <a href="{{ route('product.show', $product->id) }}" class="block w-full h-48 bg-gray-200 rounded mb-4"></a>
-                            <form action="{{ route('cart.add') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full mb-2 hover:bg-blue-600">
-                                    + Agregar
-                                </button>
-                            </form>
-                            <p class="text-green-600 font-bold text-xl">$ {{ $product->price }}</p>
-                            <p class="text-gray-600 text-sm">{{ $product->brand }}</p>
-                            <h3 class="text-gray-800 font-medium">
-                                <a href="{{ route('product.show', $product->id) }}"
-                                    class="hover:text-blue-600">{{ $product->name }}</a>
-                            </h3>
-                        </div>
-                    @endforeach
-                </div>
+                @if(request()->has('category') || request()->has('brand') || request()->has('query'))
+                    <h1 class="text-2xl font-bold">Resultados de Búsqueda</h1>
+                @else
+                    <h1 class="text-2xl font-bold">Productos</h1>
+                @endif
+
+                @if($products->isEmpty())
+                    <p class="text-gray-600 mt-6">No se encontraron productos con los filtros seleccionados. Por favor, intenta con otros filtros.</p>
+                @else
+                    <div class="grid grid-cols-4 mt-6">
+                        @foreach ($products as $product)
+                            <div class="bg-white p-4 rounded-lg">
+                                <a href="{{ route('product.show', $product->id) }}" class="block w-full h-48 bg-gray-200 rounded mb-4"></a>
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full mb-2 hover:bg-blue-600">
+                                        + Agregar
+                                    </button>
+                                </form>
+                                <p class="text-green-600 font-bold text-xl">$ {{ $product->price }}</p>
+                                <p class="text-gray-600 text-sm">{{ $product->brand }}</p>
+                                <h3 class="text-gray-800 font-medium">
+                                    <a href="{{ route('product.show', $product->id) }}"
+                                        class="hover:text-blue-600">{{ $product->name }}</a>
+                                </h3>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
 
                 {{  $products->links() }}
 

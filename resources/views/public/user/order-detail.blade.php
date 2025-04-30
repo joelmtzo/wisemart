@@ -15,23 +15,21 @@
                     lista de pedidos</a>
                 <div class="bg-white shadow rounded-lg">
                     <div class="bg-gray-100 px-4 py-2 rounded-t-lg">
-                        <h2 class="text-lg font-semibold">Detalle del Pedido</h2>
+                        <h2 class="text-lg font-semibold">Detalle del Pedido #{{ $order->id }}</h2>
                     </div>
                     <div class="p-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <!-- Información de envío del cliente -->
-                            <div>
-                                <h5 class="text-xl font-bold mb-2">Pedido #{{ $order->id }}</h5>
-                                <p class="mb-2"><strong>Cliente:</strong> {{ $order->user->name }}</p>
-                                <p class="mb-2"><strong>Dirección:</strong> {{ $order->shipping_address }}</p>
-                                <p class="mb-2"><strong>Teléfono:</strong> {{ $order->user->phone }}</p>
-                                <p class="mb-2"><strong>Fecha:</strong> {{ $order->created_at->format('d/m/Y') }}</p>
-                            </div>
-                            <!-- Información del pedido -->
-                            <div>
-                                <p class="mb-2"><strong>Subtotal:</strong> ${{ number_format($order->subtotal, 2) }}</p>
-                                <p class="mb-2"><strong>Costo de Envío:</strong> ${{ number_format($order->shipping_cost, 2) }}</p>
-                                <p class="mb-4 font-bold"><strong>Total:</strong> ${{ number_format($order->total, 2) }}</p>
+                        <div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="mb-2"><strong>Cliente:</strong> {{ $order->user->name }}</p>
+                                    <p class="mb-2"><strong>Estatus:</strong> {{ $order->order_status }}</p>
+                                    <p class="mb-2"><strong>Número de Rastreo:</strong> {{ $order->tracking_number ?? 'No disponible' }}</p>
+                                </div>
+                                <div>
+                                    <p class="mb-2"><strong>Subtotal:</strong> ${{ number_format($order->subtotal, 2) }}</p>
+                                    <p class="mb-2"><strong>Costo de Envío:</strong> ${{ number_format($order->shipping_cost, 2) }}</p>
+                                    <p class="mb-4 font-bold"><strong>Total:</strong> ${{ number_format($order->total, 2) }}</p>
+                                </div>
                             </div>
                         </div>
                         <h6 class="text-lg font-semibold mb-2">Productos:</h6>
@@ -41,6 +39,7 @@
                                     <th class="border border-gray-300 px-4 py-2 text-left">Producto</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Cantidad</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Precio</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,6 +48,7 @@
                                         <td class="border border-gray-300 px-4 py-2">{{ $item->product->name }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ $item->quantity }}</td>
                                         <td class="border border-gray-300 px-4 py-2">${{ number_format($item->price, 2) }}</td>
+                                        <td class="border border-gray-300 px-4 py-2">${{ number_format($item->quantity * $item->price, 2) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
